@@ -17,21 +17,39 @@
         </div>
         <div class="weather">
             <img src="images/rain.png" class="weather-icon">
-            <h1 class="temp">22°C</h1>
-            <h2 class="city">New York</h2>
+            <h1 class="temp">0°C</h1>
+            <h2 class="city">City</h2>
             <div class="details">
-                <div class="col">
-                    <img src="images/humidity.png">
-                    <div>
-                        <p class="humidity">50%</p>
-                        <p>Humidity</p>
+                <div class="row">
+                    <div class="col">
+                        <img src="images/humidity.png">
+                        <div>
+                            <p class="humidity">0%</p>
+                            <p>Humidity</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src="images/wind.png">
+                        <div>
+                            <p class="wind">0 km/h</p>
+                            <p>Wind Speed</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <img src="images/wind.png">
-                    <div>
-                        <p class="wind">15 km/h</p>
-                        <p>Wind Speed</p>
+                <div class="row">
+                    <div class="col">
+                        <img src="images/thermometer.png">
+                        <div>
+                            <p class="feels">0°C</p>
+                            <p>Feels like</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src="images/barometer.png">
+                        <div>
+                            <p class="air">0 hPa</p>
+                            <p>Air Pressure</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,7 +77,24 @@ async function checkWeather(city) {
         document.querySelector(".city").innerHTML = data.name;
         document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
         document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
-        document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+        document.querySelector(".feels").innerHTML = Math.round(data.main.feels_like) + "°C";
+        document.querySelector(".air").innerHTML = data.main.pressure + "hPa";
+
+        function getWindDirection(degree) {
+            if (degree >= 337.5 || degree < 22.5) return "↓";
+            else if (degree >= 22.5 && degree < 67.5) return "↙";
+            else if (degree >= 67.5 && degree < 112.5) return "←";
+            else if (degree >= 112.5 && degree < 157.5) return "↖";
+            else if (degree >= 157.5 && degree < 202.5) return "↑";
+            else if (degree >= 202.5 && degree < 247.5) return "↗";
+            else if (degree >= 247.5 && degree < 292.5) return "→";
+            else if (degree >= 292.5 && degree < 337.5) return "↘";
+            return "N ↓";
+        }
+
+        // Usage:
+        document.querySelector(".wind").innerHTML = 
+            data.wind.speed + " km/h " + getWindDirection(data.wind.deg);
 
         if(data.weather[0].main == "Clouds"){
             weatherIcon.src = "images/clouds.png";
