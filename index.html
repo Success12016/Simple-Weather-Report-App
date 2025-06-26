@@ -9,11 +9,11 @@
 <body>
     <div class="card">
         <div class="search">
-            <input type="text" placeholder="City" spellcheck="false">
+            <input type="text" placeholder="Enter a City/Country" spellcheck="false">
             <button><img src="images/search.png"></button>
         </div>
         <div class="error">
-            <p>Invalid City Name</p>
+            <p>Invalid City/Country Name</p>
         </div>
         <div class="weather">
             <img src="images/rain.png" class="weather-icon">
@@ -78,7 +78,7 @@ async function checkWeather(city) {
         document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
         document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
         document.querySelector(".feels").innerHTML = Math.round(data.main.feels_like) + "°C";
-        document.querySelector(".air").innerHTML = data.main.pressure + "hPa";
+        document.querySelector(".air").innerHTML = data.main.pressure + " hPa";
 
         function getWindDirection(degree) {
             if (degree >= 337.5 || degree < 22.5) return "↓";
